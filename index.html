@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="企税康-财税合规专家，守护企业财税健康，助力企业行稳致远。连锁财税服务品牌。" />
+  <title>企税康 — 财税合规专家 | 守护企业财税健康</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#0f172a',
+            secondary: '#334155',
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="assets/custom.css" />
+</head>
+<body class="font-body text-slate-950 bg-slate-50">
+
+  <!-- 1. 顶层超窄工具栏 -->
+  <div class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a] text-white/90 text-sm border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
+      <a href="tel:400-400-4000" class="flex items-center gap-1.5 hover:text-white transition-colors duration-200 cursor-pointer">
+        <i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i>
+        <span>全国客服电话：400-400-4000</span>
+      </a>
+      <a href="#" class="flex items-center gap-1.5 hover:text-white transition-colors duration-200 cursor-pointer">
+        <i data-lucide="users" class="w-3 h-3 shrink-0"></i>
+        <span>员工工作平台</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. 悬浮主导航栏 -->
+  <header id="main-header" class="fixed top-10 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="#hero" class="flex items-center gap-3 shrink-0 cursor-pointer group">
+        <img src="assets/logo.png" alt="企税康" class="logo-img h-10 w-auto object-contain" />
+        <span class="header-slogan hidden sm:inline text-white/70 text-sm font-medium border-l border-white/20 pl-3 group-hover:text-white/90 transition-colors duration-200">财税合规专家</span>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-1" aria-label="主导航">
+        <a href="#hero" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">首页</a>
+        <a href="#products" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">全生命周期产品</a>
+        <a href="#services" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">代办服务</a>
+        <a href="#testimonials" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">客户证言</a>
+        <a href="#footer" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">关于我们</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#lead-form" class="hidden sm:inline-flex btn-gradient-blue text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 hover:-translate-y-px transition-all duration-200 cursor-pointer shadow-lg shadow-blue-900/30">
+          免费财税测算 / 立即咨询
+        </a>
+        <button id="menu-toggle" type="button" class="header-menu-btn xl:hidden text-white p-2 cursor-pointer" aria-label="打开菜单" aria-expanded="false">
+          <i data-lucide="menu" id="icon-menu" class="w-6 h-6"></i>
+          <i data-lucide="x" id="icon-close" class="w-6 h-6 hidden"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-menu" class="xl:hidden hidden border-t border-white/10 px-4 py-4 flex flex-col gap-1">
+      <a href="#hero" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">首页</a>
+      <a href="#products" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">全生命周期产品</a>
+      <a href="#services" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">代办服务</a>
+      <a href="#testimonials" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">客户证言</a>
+      <a href="#footer" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">关于我们</a>
+      <a href="#lead-form" class="mt-2 btn-gradient-blue text-white text-center font-semibold px-5 py-3 rounded-lg cursor-pointer">免费财税测算 / 立即咨询</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 3. Hero 首屏 -->
+    <section id="hero" class="relative min-h-screen flex flex-col justify-center pt-28">
+      <div class="absolute inset-0">
+        <img src="assets/hero-suzhou.png" alt="苏南标杆商务区" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 py-20 md:py-28 w-full">
+        <div class="max-w-3xl">
+          <p class="inline-block text-sky-300/90 text-sm font-medium tracking-widest uppercase mb-4 border border-sky-400/30 rounded-full px-4 py-1.5 bg-sky-950/30">
+            区域连锁服务品牌
+          </p>
+          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            守护企业财税健康，<br />
+            <span class="bg-gradient-to-r from-sky-300 to-blue-400 bg-clip-text text-transparent">助力企业行稳致远</span>
+          </h1>
+          <p class="text-white/70 text-lg mb-10 max-w-xl">
+            领先财税合规服务商，13年深耕，100+专业团队，9000+企业信赖之选
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#lead-form" class="btn-gradient-blue text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 hover:-translate-y-px transition-all duration-200 cursor-pointer shadow-xl shadow-blue-900/40">立即咨询</a>
+            <a href="#products" class="border-2 border-white/40 text-white font-semibold px-8 py-3.5 rounded-lg bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60 transition-all duration-200 cursor-pointer">了解产品体系</a>
+          </div>
+        </div>
+
+        <div class="mt-16 md:mt-24 flex flex-wrap gap-4 justify-center md:justify-start">
+          <div class="flex-1 min-w-[140px] bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-6 py-5 text-center">
+            <div class="font-heading text-3xl md:text-4xl font-bold text-white tabular-nums">
+              <span data-counter="13" data-suffix=" Years">0</span>
+            </div>
+            <div class="text-white/70 text-sm mt-1">行业深耕（年）</div>
+          </div>
+          <div class="flex-1 min-w-[140px] bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-6 py-5 text-center">
+            <div class="font-heading text-3xl md:text-4xl font-bold text-white tabular-nums">
+              <span data-counter="100" data-suffix="+">0</span>
+            </div>
+            <div class="text-white/70 text-sm mt-1">综合服务团队（人）</div>
+          </div>
+          <div class="flex-1 min-w-[140px] bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-6 py-5 text-center">
+            <div class="font-heading text-3xl md:text-4xl font-bold text-white tabular-nums">
+              <span data-counter="9000" data-suffix="+">0</span>
+            </div>
+            <div class="text-white/70 text-sm mt-1">累计服务客户（家）</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 产品金字塔 -->
+    <section id="products" class="py-20 md:py-28 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">企业全生命周期产品体系</h2>
+          <p class="text-secondary max-w-2xl mx-auto">从初创到集团化，精准匹配企业发展阶段的财税合规解决方案</p>
+        </div>
+
+        <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-6 items-start">
+          <!-- 左侧：产品匹配矩阵 -->
+          <div class="space-y-3">
+            <h3 class="font-heading font-semibold text-primary mb-4 text-lg">产品匹配矩阵</h3>
+            <div data-stage-for="0" class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300">
+              <div class="p-2 rounded-lg bg-slate-200 text-slate-500"><i data-lucide="building-2" class="w-5 h-5"></i></div>
+              <div><div class="font-semibold text-primary">初创期</div><div class="text-sm text-secondary">团队3-5人</div></div>
+            </div>
+            <div data-stage-for="1" class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300">
+              <div class="p-2 rounded-lg bg-slate-200 text-slate-500"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
+              <div><div class="font-semibold text-primary">成长期</div><div class="text-sm text-secondary">年营收300w以上</div></div>
+            </div>
+            <div data-stage-for="2" class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300">
+              <div class="p-2 rounded-lg bg-slate-200 text-slate-500"><i data-lucide="factory" class="w-5 h-5"></i></div>
+              <div><div class="font-semibold text-primary">发展期</div><div class="text-sm text-secondary">有专职会计，年营收2000w以上</div></div>
+            </div>
+            <div data-stage-for="3" class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300">
+              <div class="p-2 rounded-lg bg-slate-200 text-slate-500"><i data-lucide="landmark" class="w-5 h-5"></i></div>
+              <div><div class="font-semibold text-primary">成熟期</div><div class="text-sm text-secondary">集团化连锁公司</div></div>
+            </div>
+          </div>
+
+          <!-- 中间：金字塔 -->
+          <div class="flex flex-col items-center gap-2 py-4">
+            <button type="button" data-pyramid="3" class="w-44 bg-gradient-to-r from-indigo-600 to-blue-800 text-white rounded-lg py-3 px-4 text-center transition-all duration-300 cursor-pointer opacity-80">
+              <div class="font-semibold text-sm md:text-base">集团化税务外包</div>
+              <div class="text-xs text-white/80 mt-0.5">预算：一事一议</div>
+            </button>
+            <button type="button" data-pyramid="2" class="w-56 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg py-3 px-4 text-center transition-all duration-300 cursor-pointer opacity-80">
+              <div class="font-semibold text-sm md:text-base">常年财税顾问</div>
+              <div class="text-xs text-white/80 mt-0.5">预算：5w-30w/年</div>
+            </button>
+            <button type="button" data-pyramid="1" class="w-72 max-w-full bg-gradient-to-r from-sky-600 to-blue-700 text-white rounded-lg py-3 px-4 text-center transition-all duration-300 cursor-pointer opacity-80">
+              <div class="font-semibold text-sm md:text-base">合规代账</div>
+              <div class="text-xs text-white/80 mt-0.5">预算：1w-5w/年</div>
+            </button>
+            <button type="button" data-pyramid="0" class="w-96 max-w-full bg-gradient-to-r from-sky-500 to-cyan-600 text-white rounded-lg py-3 px-4 text-center transition-all duration-300 cursor-pointer opacity-80">
+              <div class="font-semibold text-sm md:text-base">常规代账 + 代办服务</div>
+              <div class="text-xs text-white/80 mt-0.5">预算：1w以内/年</div>
+            </button>
+          </div>
+
+          <!-- 右侧：服务板块 -->
+          <div class="space-y-4">
+            <h3 class="font-heading font-semibold text-primary mb-4 text-lg">三大服务板块</h3>
+            <div data-service-for="accounting" class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300 panel-dim">
+              <h4 class="font-semibold text-primary mb-3">会计服务</h4>
+              <ul class="space-y-1.5 text-sm text-secondary">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>基础报税（会计助理）</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>常规代账（初级会计）</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>合规代账（VIP会计）</li>
+              </ul>
+            </div>
+            <div data-service-for="tax" class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300 panel-dim">
+              <h4 class="font-semibold text-primary mb-3">财税服务</h4>
+              <ul class="space-y-1.5 text-sm text-secondary">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>常年财税顾问</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>财税体系搭建</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>涉税专项服务</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>稽查/风评/自查</li>
+              </ul>
+            </div>
+            <div data-service-for="agency" class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 transition-all duration-300 panel-dim">
+              <h4 class="font-semibold text-primary mb-3">代办服务</h4>
+              <ul class="space-y-1.5 text-sm text-secondary">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>工商类快捷入口</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>政策类快捷入口</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>注册/变更/注销</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 shrink-0"></span>资质认定申报</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 旗舰服务 Tab -->
+    <section id="services" class="py-20 md:py-28 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-10">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">旗舰服务精细化展示</h2>
+          <p class="text-secondary">专业分工、标准流程，全流程透明可追踪</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2 mb-10" role="tablist">
+          <button type="button" data-tab="agency" class="tab-btn active px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer">高效代办服务</button>
+          <button type="button" data-tab="bookkeeping" class="tab-btn px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:border-sky-300 transition-all duration-200 cursor-pointer">常规代理记账</button>
+          <button type="button" data-tab="vip" class="tab-btn px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:border-sky-300 transition-all duration-200 cursor-pointer">合规代账 · VIP会计</button>
+          <button type="button" data-tab="advisor" class="tab-btn px-5 py-2.5 rounded-lg text-sm font-semibold bg-white text-slate-600 border border-slate-200 hover:border-sky-300 transition-all duration-200 cursor-pointer">常年财税顾问</button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-10 min-h-[400px]">
+          <!-- Tab 1: 代办 -->
+          <div data-tab-panel="agency" class="tab-panel active space-y-8">
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-primary mb-4 flex items-center gap-2">
+                <i data-lucide="building" class="w-5 h-5 text-sky-600"></i>注册公司
+              </h3>
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>提供开办专业建议</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>资料信息收取</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>公司名称核定</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>进行注册申请</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>指导法人股东签字</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>线上+线下领取营业执照</div>
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg text-sm text-secondary"><i data-lucide="file-text" class="w-4 h-4 text-sky-500 shrink-0"></i>刻章</div>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-primary mb-4 flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-5 h-5 text-sky-600"></i>注册地址与银行开户
+              </h3>
+              <div class="grid sm:grid-cols-2 gap-3">
+                <div class="p-4 bg-slate-50 rounded-lg text-sm text-secondary">地址匹配、协助收件、场地查看</div>
+                <div class="p-4 bg-slate-50 rounded-lg text-sm text-secondary">银行预约、开户资料准备、上门拍照</div>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-primary mb-4 flex items-center gap-2">
+                <i data-lucide="landmark" class="w-5 h-5 text-sky-600"></i>公司注销与政策申报
+              </h3>
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="p-3 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-lg text-sm font-medium text-primary border border-sky-100">科技型中小企业</div>
+                <div class="p-3 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-lg text-sm font-medium text-primary border border-sky-100">省科技民营企业</div>
+                <div class="p-3 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-lg text-sm font-medium text-primary border border-sky-100">高新技术企业</div>
+                <div class="p-3 bg-gradient-to-br from-sky-50 to-indigo-50 rounded-lg text-sm font-medium text-primary border border-sky-100">专精特新企业认定</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: 代账 -->
+          <div data-tab-panel="bookkeeping" class="tab-panel space-y-8">
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-primary mb-6">做账报税流程</h3>
+              <div class="flex flex-col md:flex-row items-stretch gap-2">
+                <div class="flex items-center flex-1 gap-2">
+                  <div class="flex-1 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="font-semibold text-primary mb-2">前期准备</div>
+                    <ul class="text-sm text-secondary space-y-1"><li>指导设置密码</li><li>三方协议签订</li></ul>
+                  </div>
+                  <i data-lucide="arrow-right" class="w-5 h-5 text-sky-400 shrink-0 hidden md:block"></i>
+                </div>
+                <div class="flex items-center flex-1 gap-2">
+                  <div class="flex-1 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="font-semibold text-primary mb-2">月度</div>
+                    <ul class="text-sm text-secondary space-y-1"><li>票据催收</li><li>个税测算</li><li>做账报税</li></ul>
+                  </div>
+                  <i data-lucide="arrow-right" class="w-5 h-5 text-sky-400 shrink-0 hidden md:block"></i>
+                </div>
+                <div class="flex items-center flex-1 gap-2">
+                  <div class="flex-1 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="font-semibold text-primary mb-2">季度</div>
+                    <ul class="text-sm text-secondary space-y-1"><li>企业所得税</li><li>印花税申报</li></ul>
+                  </div>
+                  <i data-lucide="arrow-right" class="w-5 h-5 text-sky-400 shrink-0 hidden md:block"></i>
+                </div>
+                <div class="flex-1 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                  <div class="font-semibold text-primary mb-2">年度</div>
+                  <ul class="text-sm text-secondary space-y-1"><li>工商年报</li><li>税务汇算清缴</li></ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-heading text-xl font-semibold text-primary mb-4">托管与咨询</h3>
+              <div class="grid sm:grid-cols-3 gap-4">
+                <div class="p-5 rounded-xl border border-slate-200 hover:border-sky-300 hover:shadow-md transition-all duration-200">
+                  <i data-lucide="calculator" class="w-6 h-6 text-sky-600 mb-2"></i>
+                  <div class="font-semibold text-primary">发票托管</div>
+                  <div class="text-sm text-secondary mt-1">发票开具、额度管理</div>
+                </div>
+                <div class="p-5 rounded-xl border border-slate-200 hover:border-sky-300 hover:shadow-md transition-all duration-200">
+                  <i data-lucide="calculator" class="w-6 h-6 text-sky-600 mb-2"></i>
+                  <div class="font-semibold text-primary">社保公积金托管</div>
+                  <div class="text-sm text-secondary mt-1">代缴代管全流程</div>
+                </div>
+                <div class="p-5 rounded-xl border border-slate-200 hover:border-sky-300 hover:shadow-md transition-all duration-200">
+                  <i data-lucide="calculator" class="w-6 h-6 text-sky-600 mb-2"></i>
+                  <div class="font-semibold text-primary">日常咨询</div>
+                  <div class="text-sm text-secondary mt-1">多维财税/公司法咨询</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: VIP -->
+          <div data-tab-panel="vip" class="tab-panel">
+            <div class="flex items-center gap-2 mb-6 flex-wrap">
+              <i data-lucide="badge-check" class="w-6 h-6 text-amber-500"></i>
+              <h3 class="font-heading text-xl font-semibold text-primary">标准 8 大合规步骤服务流</h3>
+              <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">明星产品</span>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">01</div><div class="font-semibold text-primary text-sm">首次账税规划</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">02</div><div class="font-semibold text-primary text-sm">建账/账务交接</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">03</div><div class="font-semibold text-primary text-sm">首次服务沟通</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">04</div><div class="font-semibold text-primary text-sm">事务性代办</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">05</div><div class="font-semibold text-primary text-sm">精细化做账报账</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">06</div><div class="font-semibold text-primary text-sm">每月主动沟通</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">07</div><div class="font-semibold text-primary text-sm">动态税务管理</div></div>
+              <div class="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-100"><div class="text-2xl font-bold text-sky-200 font-heading mb-1">08</div><div class="font-semibold text-primary text-sm">兜底服务</div></div>
+            </div>
+          </div>
+
+          <!-- Tab 4: 顾问 -->
+          <div data-tab-panel="advisor" class="tab-panel">
+            <div class="flex items-center gap-2 mb-6 flex-wrap">
+              <i data-lucide="shield" class="w-6 h-6 text-indigo-600"></i>
+              <h3 class="font-heading text-xl font-semibold text-primary">四大核心专家级交付物</h3>
+              <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">高端定制</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="flex gap-4 p-6 rounded-xl border border-indigo-100 bg-gradient-to-br from-white to-indigo-50/50">
+                <div class="p-3 bg-indigo-100 rounded-xl h-fit"><i data-lucide="bar-chart-3" class="w-6 h-6 text-indigo-600"></i></div>
+                <div><div class="font-semibold text-primary text-lg">税务顶层设计</div><div class="text-secondary mt-1">入企调研、优化建议书</div></div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-xl border border-indigo-100 bg-gradient-to-br from-white to-indigo-50/50">
+                <div class="p-3 bg-indigo-100 rounded-xl h-fit"><i data-lucide="message-square" class="w-6 h-6 text-indigo-600"></i></div>
+                <div><div class="font-semibold text-primary text-lg">节点服务</div><div class="text-secondary mt-1">月度、季度交付汇报、年度复盘总结</div></div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-xl border border-indigo-100 bg-gradient-to-br from-white to-indigo-50/50">
+                <div class="p-3 bg-indigo-100 rounded-xl h-fit"><i data-lucide="shield" class="w-6 h-6 text-indigo-600"></i></div>
+                <div><div class="font-semibold text-primary text-lg">税务服务</div><div class="text-secondary mt-1">税企沟通、税务自查与预警</div></div>
+              </div>
+              <div class="flex gap-4 p-6 rounded-xl border border-indigo-100 bg-gradient-to-br from-white to-indigo-50/50">
+                <div class="p-3 bg-indigo-100 rounded-xl h-fit"><i data-lucide="users" class="w-6 h-6 text-indigo-600"></i></div>
+                <div><div class="font-semibold text-primary text-lg">CPA日常咨询服务</div><div class="text-secondary mt-1">注册会计师一对一专属顾问</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 核心优势 -->
+    <section class="py-20 md:py-28 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-14">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">品牌四大核心优势</h2>
+          <p class="text-secondary">专业、规模、区域深耕 — 值得信赖的财税合规伙伴</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center mb-5"><i data-lucide="clock" class="w-7 h-7 text-sky-700"></i></div>
+            <h3 class="font-heading text-lg font-semibold text-primary mb-2">专注服务 · 深耕行业13年</h3>
+            <p class="text-secondary text-sm leading-relaxed">用时间沉淀最靠谱的财税合规水准，历经政策变革与市场考验。</p>
+          </div>
+          <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center mb-5"><i data-lucide="users" class="w-7 h-7 text-sky-700"></i></div>
+            <h3 class="font-heading text-lg font-semibold text-primary mb-2">综合团队 · 超过100人</h3>
+            <p class="text-secondary text-sm leading-relaxed">汇聚注册会计师、税务师及资深财税专家，多学科协作保障服务质量。</p>
+          </div>
+          <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center mb-5"><i data-lucide="trophy" class="w-7 h-7 text-sky-700"></i></div>
+            <h3 class="font-heading text-lg font-semibold text-primary mb-2">规模领先 · 行业遥遥领先</h3>
+            <p class="text-secondary text-sm leading-relaxed">上万家企业案例验证，服务客户总数在区域内处于领先地位。</p>
+          </div>
+          <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center mb-5"><i data-lucide="map-pin" class="w-7 h-7 text-sky-700"></i></div>
+            <h3 class="font-heading text-lg font-semibold text-primary mb-2">区域标杆 · 本地连锁品牌</h3>
+            <p class="text-secondary text-sm leading-relaxed">针对现行政策及营商环境，提供最精准的涉税风控与合规方案。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 客户证言 双行走马灯 -->
+    <section id="testimonials" class="py-20 md:py-28 bg-slate-50 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 mb-10 text-center">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">客户证言与真实案例</h2>
+        <p class="text-secondary">涵盖各行各业的合规心声，见证企税康的专业力量</p>
+      </div>
+      <div class="space-y-5">
+        <!-- 第一行：向左滚动 -->
+        <div class="relative">
+          <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none"></div>
+          <div class="flex gap-5 marquee-track">
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"自从企税康接管财务后，研发费用申报、发票风险直接降为零，选他们准没错！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">陈总</div><div class="text-xs text-slate-400 mt-0.5">苏州国际贸易公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"高新技术企业和专精特新认定多亏了杨老师团队，帮我们拿到了切实的税收优惠！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">李总</div><div class="text-xs text-slate-400 mt-0.5">苏州设备制造公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"陈老师团队已经守护我们9年了，物流发票管理极度规范，每次新政策都主动过来说明！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">吴总</div><div class="text-xs text-slate-400 mt-0.5">苏州供应链管理公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"运输行业发票合规一直是痛点，企税康帮我们建立了完善的管理体系，省心省力。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">孟总</div><div class="text-xs text-slate-400 mt-0.5">苏州物流公司</div></div></div>
+            <!-- 重复 -->
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"自从企税康接管财务后，研发费用申报、发票风险直接降为零，选他们准没错！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">陈总</div><div class="text-xs text-slate-400 mt-0.5">苏州国际贸易公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"高新技术企业和专精特新认定多亏了杨老师团队，帮我们拿到了切实的税收优惠！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">李总</div><div class="text-xs text-slate-400 mt-0.5">苏州设备制造公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"陈老师团队已经守护我们9年了，物流发票管理极度规范，每次新政策都主动过来说明！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">吴总</div><div class="text-xs text-slate-400 mt-0.5">苏州供应链管理公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"运输行业发票合规一直是痛点，企税康帮我们建立了完善的管理体系，省心省力。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">孟总</div><div class="text-xs text-slate-400 mt-0.5">苏州物流公司</div></div></div>
+          </div>
+        </div>
+        <!-- 第二行：向右滚动 -->
+        <div class="relative">
+          <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none"></div>
+          <div class="flex gap-5 marquee-track-reverse">
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"顾问式服务非常专业，不仅做账报税，更能从税务角度给我们经营建议。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">王总</div><div class="text-xs text-slate-400 mt-0.5">苏州管理咨询公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"跨境税务政策复杂多变，企税康团队反应迅速，每次都能第一时间给出合规方案。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">陆总</div><div class="text-xs text-slate-400 mt-0.5">苏州跨境电商公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"从初创到现在的规模，企税康一路陪伴，财税合规从未让我们操心。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">任总</div><div class="text-xs text-slate-400 mt-0.5">苏州电子商务公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"医疗行业税务要求严格，企税康的专业度让我们非常放心，强烈推荐！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">蔡总</div><div class="text-xs text-slate-400 mt-0.5">苏州医疗科技公司</div></div></div>
+            <!-- 重复 -->
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"顾问式服务非常专业，不仅做账报税，更能从税务角度给我们经营建议。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">王总</div><div class="text-xs text-slate-400 mt-0.5">苏州管理咨询公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"跨境税务政策复杂多变，企税康团队反应迅速，每次都能第一时间给出合规方案。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">陆总</div><div class="text-xs text-slate-400 mt-0.5">苏州跨境电商公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"从初创到现在的规模，企税康一路陪伴，财税合规从未让我们操心。"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">任总</div><div class="text-xs text-slate-400 mt-0.5">苏州电子商务公司</div></div></div>
+            <div class="shrink-0 w-[340px] p-6 bg-white rounded-2xl border border-slate-100 shadow-md"><i data-lucide="quote" class="w-8 h-8 text-sky-200 mb-3"></i><p class="text-secondary text-sm leading-relaxed mb-4">"医疗行业税务要求严格，企税康的专业度让我们非常放心，强烈推荐！"</p><div class="border-t border-slate-100 pt-4"><div class="font-semibold text-primary">蔡总</div><div class="text-xs text-slate-400 mt-0.5">苏州医疗科技公司</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. 页脚 & 线索留存 -->
+  <footer id="footer" class="bg-primary text-white">
+    <div id="lead-form" class="border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 py-16 md:py-20">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold mb-3">立即免费获取《企业财税合规动态体检表》</h2>
+          <p class="text-white/60 mb-8 text-sm">填写信息，专业顾问将在24小时内与您联系</p>
+          <form id="lead-form-el" class="grid sm:grid-cols-3 gap-4">
+            <input type="text" name="company" required placeholder="公司名称" class="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30 transition-all duration-200" />
+            <input type="tel" name="phone" required placeholder="联系电话" class="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30 transition-all duration-200" />
+            <input type="text" name="industry" required placeholder="主营行业" class="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30 transition-all duration-200" />
+            <button type="submit" class="sm:col-span-3 btn-gradient-orange text-white font-semibold py-3.5 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all duration-200 cursor-pointer">
+              <i data-lucide="send" class="w-4 h-4"></i>一键提交
+            </button>
+          </form>
+          <div id="lead-success" class="hidden flex flex-col items-center gap-3 py-8">
+            <i data-lucide="check-circle" class="w-12 h-12 text-emerald-400"></i>
+            <p class="text-lg font-medium">提交成功！我们将尽快与您联系。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid md:grid-cols-3 gap-10">
+        <div>
+          <img src="assets/logo.png" alt="企税康" class="logo-img h-10 mb-4" />
+          <p class="text-white/60 text-sm leading-relaxed">企税康-财税合规专家，连锁财税服务品牌，守护企业财税健康。</p>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-sky-400"></i>核心网点分布
+          </h4>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li>苏州工业园区总部</li>
+            <li>苏州常熟服务中心</li>
+            <li>无锡服务中心</li>
+            <li>上海服务中心</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold mb-4">友情链接</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-white/60 hover:text-sky-300 transition-colors duration-200 cursor-pointer">江苏省税务局</a></li>
+            <li><a href="#" class="text-white/60 hover:text-sky-300 transition-colors duration-200 cursor-pointer">国家企业信用信息公示</a></li>
+            <li><a href="#" class="text-white/60 hover:text-sky-300 transition-colors duration-200 cursor-pointer">苏州工业园区</a></li>
+          </ul>
+          <div class="mt-6 p-4 bg-white/5 rounded-xl inline-block">
+            <div class="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center text-white/40 text-xs text-center leading-relaxed">微信官方<br />合规客服</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm text-white/40">
+        Copyright © 2026 企税康版权所有 | 苏ICP备xxxxxx号
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons()</script>
+  <script src="assets/main.js"></script>
+</body>
+</html>
