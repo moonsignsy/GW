@@ -20,7 +20,7 @@ function initStickyNav() {
     const pastHero = window.scrollY >= hero.offsetHeight - 72
     header.classList.toggle('header-light', pastHero)
     if (!pastHero) {
-      header.classList.toggle('glass-nav-scrolled', window.scrollY > 40)
+      header.classList.toggle('glass-nav-scrolled', window.scrollY > 10)
     } else {
       header.classList.remove('glass-nav-scrolled')
     }
@@ -144,43 +144,85 @@ function initCounters() {
 }
 
 /* ── 产品金字塔联动 ── */
+const PYRAMID_DATA = {
+  0: {
+    stage: '初创期',
+    badgeClass: 'badge-startup',
+    scale: '团队 3-5 人',
+    service: '常规代账 + 工商代办服务',
+    budget: '1w 元以内 / 年',
+  },
+  1: {
+    stage: '成长期',
+    badgeClass: 'badge-growth',
+    scale: '年营收 300w 以上',
+    service: '合规代账（5年以上经验中级会计主理）',
+    budget: '1w - 5w 元 / 年',
+  },
+  2: {
+    stage: '发展期',
+    badgeClass: 'badge-develop',
+    scale: '有专职会计，年营收 2000w 以上',
+    service: '常年财税顾问（注册会计师/税务师把关）',
+    budget: '5w - 30w 元 / 年',
+  },
+  3: {
+    stage: '成熟期',
+    badgeClass: 'badge-mature',
+    scale: '集团化连锁公司',
+    service: '集团化税务外包（一事一议定制方案）',
+    budget: '一事一议',
+  },
+}
+
 function initPyramid() {
   const btns = document.querySelectorAll('[data-pyramid]')
-  const stagePanels = document.querySelectorAll('[data-stage-for]')
-  const servicePanels = document.querySelectorAll('[data-service-for]')
+  const budgetBoxes = document.querySelectorAll('[data-budget-for]')
+  const detail = document.getElementById('pyramid-detail')
+  const badge = document.getElementById('pyramid-detail-badge')
+  const scale = document.getElementById('pyramid-detail-scale')
+  const service = document.getElementById('pyramid-detail-service')
+  const detailMobile = document.getElementById('pyramid-detail-mobile')
+  const badgeMobile = document.getElementById('pyramid-detail-mobile-badge')
+  const scaleMobile = document.getElementById('pyramid-detail-mobile-scale')
+  const serviceMobile = document.getElementById('pyramid-detail-mobile-service')
+  const budgetMobile = document.getElementById('pyramid-detail-mobile-budget')
   if (!btns.length) return
+
+  const updatePanel = (panel, els, data) => {
+    if (!panel || !els.badge) return
+    panel.classList.add('is-switching')
+    setTimeout(() => {
+      els.badge.textContent = data.stage
+      els.badge.className = `pyramid-stage-badge ${data.badgeClass}`
+      if (els.scale) els.scale.textContent = data.scale
+      if (els.service) els.service.textContent = data.service
+      if (els.budget) els.budget.textContent = data.budget
+      panel.classList.remove('is-switching')
+    }, 150)
+  }
 
   const setActive = (level) => {
     const lv = parseInt(level, 10)
+    const data = PYRAMID_DATA[lv]
+    if (!data) return
 
     btns.forEach((b) => {
       b.classList.toggle('active', parseInt(b.dataset.pyramid, 10) === lv)
-      b.classList.toggle('opacity-80', parseInt(b.dataset.pyramid, 10) !== lv)
     })
 
-    stagePanels.forEach((p) => {
-      const stage = parseInt(p.dataset.stageFor, 10)
-      let active = false
-      if (lv === 0) active = stage === 0
-      else if (lv === 1) active = stage <= 1
-      else if (lv === 2) active = stage <= 2
-      else if (lv === 3) active = stage === 3
-      p.classList.toggle('panel-active', active)
-      p.classList.toggle('panel-dim', !active)
+    budgetBoxes.forEach((box) => {
+      box.classList.toggle('active', parseInt(box.dataset.budgetFor, 10) === lv)
     })
 
-    servicePanels.forEach((p) => {
-      const key = p.dataset.serviceFor
-      const serviceLevelMap = { accounting: [0, 1], tax: [2, 3], agency: [0] }
-      const active = serviceLevelMap[key]?.includes(lv)
-      p.classList.toggle('panel-active', active)
-      p.classList.toggle('panel-dim', !active)
-    })
+    updatePanel(detail, { badge, scale, service }, data)
+    updatePanel(detailMobile, { badge: badgeMobile, scale: scaleMobile, service: serviceMobile, budget: budgetMobile }, data)
   }
 
   btns.forEach((btn) => {
-    btn.addEventListener('click', () => setActive(btn.dataset.pyramid))
     btn.addEventListener('mouseenter', () => setActive(btn.dataset.pyramid))
+    btn.addEventListener('focus', () => setActive(btn.dataset.pyramid))
+    btn.addEventListener('click', () => setActive(btn.dataset.pyramid))
   })
 
   setActive('1')
