@@ -1,0 +1,206 @@
+/* 企税康 — 自定义样式（配合 Tailwind CDN） */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.glass-nav {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-nav-scrolled {
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* 滚过首屏后：导航栏白色底色 */
+#main-header.header-light {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 8px rgba(15, 23, 42, 0.06);
+}
+
+#main-header.header-light .header-nav-link {
+  color: rgba(51, 65, 85, 0.85);
+}
+
+#main-header.header-light .header-nav-link:hover {
+  color: #0f172a;
+}
+
+/* 导航选中态：蓝色字体 + 下划线 */
+.header-nav-link {
+  position: relative;
+}
+
+.header-nav-link.active {
+  color: #38bdf8 !important;
+  font-weight: 600;
+}
+
+.header-nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.25rem;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 1px;
+}
+
+#main-header.header-light .header-nav-link.active {
+  color: #0369a1 !important;
+}
+
+#main-header.header-light .header-nav-link.active::after {
+  background: #0369a1;
+}
+
+#main-header.header-light .header-nav-link.active:hover {
+  color: #0369a1 !important;
+}
+
+.header-mobile-link.active {
+  color: #38bdf8 !important;
+  font-weight: 600;
+  border-bottom: 2px solid #38bdf8;
+  border-radius: 0;
+}
+
+#main-header.header-light .header-mobile-link.active {
+  color: #0369a1 !important;
+  border-bottom-color: #0369a1;
+  background: #f0f9ff;
+}
+
+#main-header.header-light .header-slogan {
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+#main-header.header-light .header-slogan:hover {
+  color: #0f172a;
+}
+
+#main-header.header-light .header-menu-btn {
+  color: #0f172a;
+}
+
+#main-header.header-light #mobile-menu {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+#main-header.header-light #mobile-menu .header-mobile-link {
+  color: #475569;
+}
+
+#main-header.header-light #mobile-menu .header-mobile-link:hover {
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.logo-img {
+  background: transparent;
+}
+
+.btn-gradient-blue {
+  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 50%, #1e3a8a 100%);
+}
+
+.btn-gradient-orange {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(30, 27, 75, 0.75) 40%,
+    rgba(3, 105, 161, 0.55) 100%
+  );
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+  width: max-content;
+}
+
+.marquee-track-reverse {
+  animation: marquee-reverse 45s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover,
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.pyramid-btn.active {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 20px 40px rgba(3, 105, 161, 0.3);
+  outline: 2px solid #7dd3fc;
+  outline-offset: 2px;
+}
+
+.panel-active {
+  border-color: #7dd3fc !important;
+  background-color: #f0f9ff !important;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+  opacity: 1 !important;
+}
+
+.panel-dim {
+  opacity: 0.55;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 50%, #1e3a8a 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(3, 105, 161, 0.35);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track,
+  .marquee-track-reverse { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
