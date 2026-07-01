@@ -132,15 +132,15 @@
         </div>
 
         <!-- 三栏布局：左预算 | 中金字塔（焦点） | 右阶段详情 -->
-        <div class="pyramid-layout hidden lg:grid lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,17rem)] xl:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_minmax(0,19rem)] gap-5 xl:gap-6 items-stretch">
+        <div class="pyramid-layout hidden lg:grid lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)_minmax(0,20rem)] xl:grid-cols-[minmax(0,20rem)_minmax(0,1fr)_minmax(0,22rem)] gap-5 xl:gap-6 items-stretch">
 
           <!-- 左栏：服务费用预算 -->
-          <aside class="pyramid-side-card flex flex-col">
+          <aside class="pyramid-side-card pyramid-side-card--budget flex flex-col">
             <div class="pyramid-side-card__header">
               <i data-lucide="wallet" class="w-4 h-4 text-sky-600"></i>
               <span>服务费用预算</span>
             </div>
-            <div class="pyramid-budget-stack flex-1 flex flex-col justify-center gap-1.5 py-2">
+            <div class="pyramid-budget-stack flex flex-col justify-start gap-3.5 pt-1 pb-1">
               <div data-budget-for="3" class="pyramid-budget-box">
                 <span class="pyramid-budget-tier">成熟期</span>
                 <span class="pyramid-budget-value">一事一议</span>
