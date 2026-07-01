@@ -261,10 +261,36 @@ function initTabs() {
 function initLeadForm() {
   const form = document.getElementById('lead-form-el')
   const success = document.getElementById('lead-success')
+  const errorEl = document.getElementById('lead-form-error')
+  const phoneInput = form?.querySelector('input[name="phone"]')
   if (!form || !success) return
+
+  const isValidPhone = (value) => /^1\d{10}$/.test(value.trim())
+
+  phoneInput?.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 11)
+    if (errorEl && isValidPhone(phoneInput.value)) {
+      errorEl.classList.add('hidden')
+      phoneInput.classList.remove('border-red-400')
+    }
+  })
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
+    const phone = phoneInput?.value.trim() || ''
+
+    if (!isValidPhone(phone)) {
+      if (errorEl) {
+        errorEl.textContent = '请输入正确的11位手机号码'
+        errorEl.classList.remove('hidden')
+      }
+      phoneInput?.classList.add('border-red-400')
+      phoneInput?.focus()
+      return
+    }
+
+    if (errorEl) errorEl.classList.add('hidden')
+    phoneInput?.classList.remove('border-red-400')
     form.classList.add('hidden')
     success.classList.remove('hidden')
   })
