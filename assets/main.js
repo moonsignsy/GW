@@ -216,6 +216,13 @@ function initPyramid() {
       box.classList.toggle('active', parseInt(box.dataset.budgetFor, 10) === lv)
     })
 
+    document.querySelectorAll('.pyramid-lifecycle-panel').forEach((panel) => {
+      panel.classList.add('pyramid-lifecycle-panel--active')
+    })
+    document.querySelectorAll('.pyramid-hero-card').forEach((card) => {
+      card.classList.add('pyramid-hero-card--focused')
+    })
+
     updatePanel(detail, { badge, scale, service, budget }, data)
     updatePanel(detailMobile, { badge: badgeMobile, scale: scaleMobile, service: serviceMobile, budget: budgetMobile }, data)
   }
