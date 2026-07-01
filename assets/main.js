@@ -33,7 +33,7 @@ function initStickyNav() {
 
 /* ── 导航选中高亮（滚动联动 + 点击） ── */
 function initNavActive() {
-  const sectionIds = ['hero', 'products', 'services', 'testimonials', 'footer']
+  const sectionIds = ['hero', 'products', 'testimonials', 'footer']
   const sections = sectionIds
     .map((id) => document.getElementById(id))
     .filter(Boolean)
@@ -182,6 +182,7 @@ function initPyramid() {
   const badge = document.getElementById('pyramid-detail-badge')
   const scale = document.getElementById('pyramid-detail-scale')
   const service = document.getElementById('pyramid-detail-service')
+  const budget = document.getElementById('pyramid-detail-budget')
   const detailMobile = document.getElementById('pyramid-detail-mobile')
   const badgeMobile = document.getElementById('pyramid-detail-mobile-badge')
   const scaleMobile = document.getElementById('pyramid-detail-mobile-scale')
@@ -215,7 +216,7 @@ function initPyramid() {
       box.classList.toggle('active', parseInt(box.dataset.budgetFor, 10) === lv)
     })
 
-    updatePanel(detail, { badge, scale, service }, data)
+    updatePanel(detail, { badge, scale, service, budget }, data)
     updatePanel(detailMobile, { badge: badgeMobile, scale: scaleMobile, service: serviceMobile, budget: budgetMobile }, data)
   }
 

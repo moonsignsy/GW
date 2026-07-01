@@ -189,10 +189,79 @@ footer .logo-img {
 .pyramid-btn.active,
 .pyramid-btn:hover {
   opacity: 1;
-  transform: scale(1.04);
+  transform: scale(1.05);
   z-index: 2;
   filter: brightness(1.08);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.28);
+  box-shadow: 0 16px 40px rgba(15, 48, 88, 0.35);
+}
+
+/* 三栏布局容器 */
+.pyramid-layout {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 左右侧栏卡片 */
+.pyramid-side-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pyramid-side-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  padding-bottom: 0.875rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* 中栏：产品金字塔焦点卡片 */
+.pyramid-hero-card {
+  background: linear-gradient(165deg, #f8fafc 0%, #eff6ff 45%, #f0f9ff 100%);
+  border: 2px solid #bae6fd;
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.25rem;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.15),
+    0 8px 32px rgba(14, 165, 233, 0.12),
+    0 24px 48px rgba(15, 48, 88, 0.08);
+  overflow: hidden;
+}
+
+.pyramid-hero-card--mobile {
+  min-height: auto;
+  padding: 1.25rem 1rem;
+}
+
+.pyramid-hero-card__glow {
+  position: absolute;
+  inset: -20% -10%;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(56, 189, 248, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pyramid-hero-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(186, 230, 253, 0.8);
+  border-radius: 9999px;
+  padding: 0.375rem 0.875rem;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(4px);
 }
 
 .pyramid-visual {
@@ -227,26 +296,26 @@ footer .logo-img {
 }
 
 .pyramid-tier--0 {
-  width: min(100%, 22rem);
-  min-height: 4.5rem;
+  width: min(100%, 24rem);
+  min-height: 4.75rem;
   background: linear-gradient(180deg, #1e4d7b 0%, #0f3058 100%);
 }
 
 .pyramid-tier--1 {
-  width: min(100%, 17.5rem);
-  min-height: 4rem;
+  width: min(100%, 19rem);
+  min-height: 4.25rem;
   background: linear-gradient(180deg, #5a7d94 0%, #3d6278 100%);
 }
 
 .pyramid-tier--2 {
-  width: min(100%, 13.5rem);
-  min-height: 3.75rem;
+  width: min(100%, 14.5rem);
+  min-height: 3.875rem;
   background: linear-gradient(180deg, #8eb4cc 0%, #6d96b0 100%);
 }
 
 .pyramid-tier--3 {
-  width: min(100%, 9.5rem);
-  min-height: 3.25rem;
+  width: min(100%, 10.5rem);
+  min-height: 3.375rem;
   background: linear-gradient(180deg, #b8d8ee 0%, #8eb8d8 100%);
   clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
   color: #0f3058;
@@ -254,6 +323,21 @@ footer .logo-img {
 
 .pyramid-tier--3 .pyramid-tier-sub {
   color: #1e4d7b;
+}
+
+@media (min-width: 1280px) {
+  .pyramid-tier--0 { width: min(100%, 26rem); min-height: 5rem; }
+  .pyramid-tier--1 { width: min(100%, 21rem); }
+  .pyramid-tier--2 { width: min(100%, 16rem); }
+  .pyramid-tier--3 { width: min(100%, 11.5rem); }
+
+  .pyramid-tier-title {
+    font-size: 0.9375rem;
+  }
+
+  .pyramid-tier-sub {
+    font-size: 0.75rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -266,40 +350,47 @@ footer .logo-img {
   }
 }
 
-/* 左侧预算列 */
+/* 左侧预算项 */
 .pyramid-budget-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  background: rgba(186, 214, 234, 0.35);
-  border: 1px solid rgba(148, 184, 212, 0.4);
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .pyramid-budget-box.active {
   opacity: 1;
-  background: rgba(186, 214, 234, 0.65);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   border-color: #7dd3fc;
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.2);
-  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.15);
+  transform: translateX(4px);
 }
 
-.pyramid-budget-label {
+.pyramid-budget-tier {
   font-size: 0.6875rem;
-  color: #64748b;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.125rem;
+}
+
+.pyramid-budget-box.active .pyramid-budget-tier {
+  color: #0369a1;
 }
 
 .pyramid-budget-value {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #1e4d7b;
-  white-space: nowrap;
+  line-height: 1.35;
 }
 
 /* 右侧生命周期面板 */
@@ -360,35 +451,8 @@ footer .logo-img {
   opacity: 0;
 }
 
-/* 底部服务明细 */
-.pyramid-service-box {
-  padding: 1.5rem;
-  border: 2px dashed #cbd5e1;
-  border-radius: 0.75rem;
-  background: #fafbfc;
-}
-
-.pyramid-service-item {
-  padding: 0.375rem 0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.pyramid-service-item:last-child {
-  border-bottom: none;
-}
-
-.pyramid-tag {
-  display: inline-block;
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
-  color: #1e4d7b;
-  background: rgba(186, 214, 234, 0.4);
-  border-radius: 0.375rem;
-  border: 1px solid rgba(148, 184, 212, 0.35);
-}
-
 .pyramid-btn.active {
-  outline: 2px solid #7dd3fc;
+  outline: 2px solid #38bdf8;
   outline-offset: 3px;
 }
 
@@ -415,6 +479,23 @@ footer .logo-img {
 
 .tab-panel.active {
   display: block;
+}
+
+/* 常年财税顾问 — 定制图标 */
+.advisor-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  color: #fff;
+}
+
+.advisor-icon-badge--title {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
