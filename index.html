@@ -162,11 +162,10 @@
 
           <!-- 中栏：动态交互产品金字塔（视觉焦点） -->
           <div class="pyramid-hero-card relative flex flex-col items-center justify-center min-h-[26rem]">
-            <div class="pyramid-hero-card__glow" aria-hidden="true"></div>
             <div class="relative z-10 w-full flex flex-col items-center">
               <p class="pyramid-hero-hint">
-                <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
-                悬停或点击切换产品层级
+                <i data-lucide="sparkles" class="pyramid-hero-hint__icon" aria-hidden="true"></i>
+                <span>悬停或点击切换产品层级</span>
               </p>
               <div class="pyramid-visual flex flex-col items-center gap-1.5 w-full py-4">
                 <button type="button" data-pyramid="3" class="pyramid-tier pyramid-tier--3 pyramid-btn" aria-label="成熟期 - 集团化税务外包">
@@ -196,16 +195,16 @@
             <div class="pyramid-lifecycle-panel relative rounded-xl overflow-hidden flex-1 min-h-[16rem]">
               <div class="pyramid-dots-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
               <div id="pyramid-detail" class="relative z-10 h-full flex flex-col justify-center p-5 xl:p-6">
-                <div class="pyramid-stage-badge" id="pyramid-detail-badge">成长期</div>
-                <p class="text-xl xl:text-2xl font-heading font-bold text-primary mt-4 mb-2 leading-snug" id="pyramid-detail-scale">年营收 300w 以上</p>
-                <div class="mt-3 space-y-3">
+                <div class="pyramid-stage-badge badge-growth" id="pyramid-detail-badge">成长期</div>
+                <p class="pyramid-detail-scale" id="pyramid-detail-scale">年营收 300w 以上</p>
+                <div class="mt-4 space-y-4">
                   <div>
-                    <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">核心推荐服务体系</p>
-                    <p class="text-sm xl:text-base font-medium text-secondary leading-relaxed" id="pyramid-detail-service">合规代账（5年以上经验中级会计主理）</p>
+                    <p class="pyramid-detail-label">核心推荐服务体系</p>
+                    <p class="pyramid-detail-value" id="pyramid-detail-service">合规代账（5年以上经验中级会计主理）</p>
                   </div>
-                  <div class="pt-3 border-t border-slate-200/80">
-                    <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">对应预算</p>
-                    <p class="text-sm font-semibold text-sky-700" id="pyramid-detail-budget">1w - 5w 元 / 年</p>
+                  <div class="pt-4 border-t border-slate-200/70">
+                    <p class="pyramid-detail-label">对应预算</p>
+                    <p class="pyramid-detail-budget" id="pyramid-detail-budget">1w - 5w 元 / 年</p>
                   </div>
                 </div>
               </div>
@@ -216,10 +215,9 @@
         <!-- 移动端：金字塔 + 动态面板 -->
         <div class="lg:hidden space-y-5">
           <div class="pyramid-hero-card pyramid-hero-card--mobile relative flex flex-col items-center">
-            <div class="pyramid-hero-card__glow" aria-hidden="true"></div>
             <p class="pyramid-hero-hint relative z-10">
-              <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
-              点击切换产品层级
+              <i data-lucide="sparkles" class="pyramid-hero-hint__icon" aria-hidden="true"></i>
+              <span>点击切换产品层级</span>
             </p>
             <div class="pyramid-visual relative z-10 flex flex-col items-center gap-1 py-3 w-full">
               <button type="button" data-pyramid="3" class="pyramid-tier pyramid-tier--3 pyramid-btn" aria-label="成熟期 - 集团化税务外包">
@@ -247,15 +245,15 @@
               <div class="pyramid-dots-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
               <div id="pyramid-detail-mobile" class="relative z-10 h-full flex flex-col justify-center p-6">
                 <div class="pyramid-stage-badge badge-growth" id="pyramid-detail-mobile-badge">成长期</div>
-                <p class="text-xl font-heading font-bold text-primary mt-3 mb-2" id="pyramid-detail-mobile-scale">年营收 300w 以上</p>
-                <div class="mt-3 space-y-2">
+                <p class="pyramid-detail-scale" id="pyramid-detail-mobile-scale">年营收 300w 以上</p>
+                <div class="mt-4 space-y-4">
                   <div>
-                    <p class="text-xs text-slate-400 mb-1">核心推荐服务体系</p>
-                    <p class="text-sm font-medium text-secondary" id="pyramid-detail-mobile-service">合规代账（5年以上经验中级会计主理）</p>
+                    <p class="pyramid-detail-label">核心推荐服务体系</p>
+                    <p class="pyramid-detail-value" id="pyramid-detail-mobile-service">合规代账（5年以上经验中级会计主理）</p>
                   </div>
-                  <div>
-                    <p class="text-xs text-slate-400 mb-1">服务费用预算</p>
-                    <p class="text-sm font-semibold text-sky-700" id="pyramid-detail-mobile-budget">1w - 5w 元 / 年</p>
+                  <div class="pt-4 border-t border-slate-200/70">
+                    <p class="pyramid-detail-label">服务费用预算</p>
+                    <p class="pyramid-detail-budget" id="pyramid-detail-mobile-budget">1w - 5w 元 / 年</p>
                   </div>
                 </div>
               </div>
