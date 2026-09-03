@@ -8,13 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initPyramid()
   initTabs()
   initLeadForm()
+  initCopyPhone()
 })
 
 /* ── 导航吸顶：滚过首屏切换白色导航 ── */
 function initStickyNav() {
   const header = document.getElementById('main-header')
   const hero = document.getElementById('hero')
-  if (!header || !hero) return
+  if (!header) return
+  if (!hero) {
+    header.classList.add('header-light')
+    return
+  }
 
   const onScroll = () => {
     const pastHero = window.scrollY >= hero.offsetHeight - 72
@@ -33,21 +38,42 @@ function initStickyNav() {
 
 /* ── 导航选中高亮（滚动联动 + 点击） ── */
 function initNavActive() {
-  const sectionIds = ['hero', 'products', 'testimonials', 'footer']
-  const sections = sectionIds
-    .map((id) => document.getElementById(id))
-    .filter(Boolean)
   const links = document.querySelectorAll('.header-nav-link, .header-mobile-link')
-  if (!sections.length || !links.length) return
+  if (!links.length) return
+
+  const page = document.body.dataset.page
+  const isArticlesSection = page === 'articles' || page === 'article'
+  const isShowcasePage = page === 'showcase'
 
   const setActive = (id) => {
     links.forEach((link) => {
-      const match = link.getAttribute('href') === `#${id}`
+      const href = link.getAttribute('href') || ''
+      const match = isArticlesSection
+        ? href.includes('articles.html')
+        : isShowcasePage
+          ? href.includes('showcase.html')
+          : href === `#${id}` || (id === 'articles' && href.includes('articles.html'))
       link.classList.toggle('active', match)
       if (match) link.setAttribute('aria-current', 'page')
       else link.removeAttribute('aria-current')
     })
   }
+
+  if (isArticlesSection) {
+    setActive('articles')
+    return
+  }
+
+  if (isShowcasePage) {
+    setActive('showcase')
+    return
+  }
+
+  const sectionIds = ['hero', 'products', 'testimonials', 'articles', 'footer']
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean)
+  if (!sections.length) return
 
   const update = () => {
     const offset = window.scrollY + 160
@@ -62,8 +88,8 @@ function initNavActive() {
   window.addEventListener('resize', update, { passive: true })
   links.forEach((link) => {
     link.addEventListener('click', () => {
-      const id = link.getAttribute('href')?.slice(1)
-      if (id) setActive(id)
+      const href = link.getAttribute('href') || ''
+      if (href.startsWith('#')) setActive(href.slice(1))
     })
   })
   update()
@@ -148,23 +174,24 @@ const PYRAMID_DATA = {
   0: {
     stage: '初创期',
     badgeClass: 'badge-startup',
-    scale: '团队 3-5 人',
+    scale: '中小微初创企业',
     service: '常规代账 + 工商代办服务',
-    budget: '1w 元以内 / 年',
+    budget: '1W 元以内 / 年',
   },
   1: {
     stage: '成长期',
     badgeClass: 'badge-growth',
-    scale: '年营收 300w 以上',
-    service: '合规代账（5年以上经验中级会计主理）',
-    budget: '1w - 5w 元 / 年',
+    scale: '年营收 500W 以上',
+    service: '合规代账（5年以上经验，中级会计职称）',
+    budget: '1W - 5W 元 / 年',
   },
   2: {
     stage: '发展期',
     badgeClass: 'badge-develop',
-    scale: '有专职会计，年营收 2000w 以上',
+    scale: '有专职会计，年营收 2000W 以上',
     service: '常年财税顾问（注册会计师/税务师把关）',
-    budget: '5w - 30w 元 / 年',
+    budget: '5W - 30W 元 / 年',
+    scaleCompact: true,
   },
   3: {
     stage: '成熟期',
@@ -196,7 +223,10 @@ function initPyramid() {
     setTimeout(() => {
       els.badge.textContent = data.stage
       els.badge.className = `pyramid-stage-badge ${data.badgeClass}`
-      if (els.scale) els.scale.textContent = data.scale
+      if (els.scale) {
+        els.scale.textContent = data.scale
+        els.scale.classList.toggle('pyramid-detail-scale--compact', !!data.scaleCompact)
+      }
       if (els.service) els.service.textContent = data.service
       if (els.budget) els.budget.textContent = data.budget
       panel.classList.remove('is-switching')
@@ -258,11 +288,81 @@ function initTabs() {
 }
 
 /* ── 线索表单 ── */
+const CONSULT_API = 'http://localhost:8080/api/business/consultRecord/add'
+
+function parseApiResponse(rawText) {
+  if (!rawText) return null
+  try {
+    return JSON.parse(rawText)
+  } catch {
+    return null
+  }
+}
+
+function sanitizeErrorMessage(message) {
+  if (!message) return ''
+  if (/5666|WinError|后端服务未启动|目标计算机积极拒绝|由于目标计算机积极拒绝/i.test(message)) {
+    return ''
+  }
+  return message
+}
+
+function getBackendErrorMessage(data, rawText) {
+  if (typeof data === 'string' && data.trim()) return sanitizeErrorMessage(data.trim())
+
+  if (data && typeof data === 'object') {
+    const fields = [
+      data.msg,
+      data.message,
+      data.errorMsg,
+      data.errMsg,
+      data.error,
+      data.detail,
+      data.data?.msg,
+      data.data?.message,
+    ]
+    for (const field of fields) {
+      if (typeof field === 'string' && field.trim()) {
+        const sanitized = sanitizeErrorMessage(field.trim())
+        if (sanitized) return sanitized
+      }
+    }
+
+    if (Array.isArray(data.errors)) {
+      const messages = data.errors
+        .map((item) => {
+          if (typeof item === 'string') return item
+          return item?.message || item?.msg || item?.defaultMessage || ''
+        })
+        .filter(Boolean)
+      if (messages.length) return messages.join('；')
+    }
+  }
+
+  const trimmed = rawText?.trim()
+  if (trimmed && trimmed.length <= 500 && !trimmed.startsWith('<')) {
+    return sanitizeErrorMessage(trimmed)
+  }
+  return ''
+}
+
+function isConsultSubmitSuccess(res, data) {
+  if (!res.ok) return false
+  if (!data || typeof data !== 'object') return true
+  if (typeof data.success === 'boolean') return data.success
+  if (typeof data.code === 'undefined') return true
+  const code = Number(data.code)
+  return code === 200 || code === 0
+}
+
 function initLeadForm() {
   const form = document.getElementById('lead-form-el')
   const success = document.getElementById('lead-success')
   const errorEl = document.getElementById('lead-form-error')
+  const submitBtn = form?.querySelector('button[type="submit"]')
+  const contactInput = form?.querySelector('input[name="contact"]')
   const phoneInput = form?.querySelector('input[name="phone"]')
+  const industryInput = form?.querySelector('input[name="industry"]')
   if (!form || !success) return
 
   const isValidPhone = (value) => /^1\d{10}$/.test(value.trim())
@@ -275,7 +375,21 @@ function initLeadForm() {
     }
   })
 
-  form.addEventListener('submit', (e) => {
+  const setSubmitting = (submitting) => {
+    if (!submitBtn) return
+    submitBtn.disabled = submitting
+    submitBtn.classList.toggle('opacity-70', submitting)
+    submitBtn.classList.toggle('pointer-events-none', submitting)
+    if (!submitBtn.dataset.defaultHtml) {
+      submitBtn.dataset.defaultHtml = submitBtn.innerHTML
+    }
+    submitBtn.innerHTML = submitting
+      ? '提交中…'
+      : submitBtn.dataset.defaultHtml
+    if (!submitting && window.lucide) lucide.createIcons()
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault()
     const phone = phoneInput?.value.trim() || ''
 
@@ -291,7 +405,89 @@ function initLeadForm() {
 
     if (errorEl) errorEl.classList.add('hidden')
     phoneInput?.classList.remove('border-red-400')
-    form.classList.add('hidden')
-    success.classList.remove('hidden')
+
+    const payload = {
+      contactName: contactInput?.value.trim() || '',
+      content: '',
+      mainBusiness: industryInput?.value.trim() || '',
+      phone,
+    }
+
+    setSubmitting(true)
+    try {
+      const res = await fetch(CONSULT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const rawText = await res.text()
+      const data = parseApiResponse(rawText)
+
+      if (!isConsultSubmitSuccess(res, data)) {
+        const backendMsg = getBackendErrorMessage(data, rawText)
+        throw new Error(backendMsg || `提交失败（HTTP ${res.status}）`)
+      }
+
+      form.classList.add('hidden')
+      success.classList.remove('hidden')
+    } catch (err) {
+      if (errorEl) {
+        const msg = err instanceof Error ? err.message : ''
+        const isNetworkError = err instanceof TypeError
+          || /failed to fetch|networkerror|network error|load failed/i.test(msg)
+        errorEl.textContent = isNetworkError
+          ? '提交失败，请稍后重试'
+          : msg || '提交失败，请稍后重试'
+        errorEl.classList.remove('hidden')
+      }
+    } finally {
+      setSubmitting(false)
+    }
+  })
+}
+
+/* ── 复制客服电话 ── */
+function initCopyPhone() {
+  const toast = document.getElementById('copy-toast')
+  const triggers = document.querySelectorAll('[data-copy-phone]')
+  if (!triggers.length) return
+
+  let timer
+
+  const showToast = () => {
+    if (!toast) return
+    toast.classList.add('copy-toast--visible')
+    clearTimeout(timer)
+    timer = setTimeout(() => toast.classList.remove('copy-toast--visible'), 2000)
+  }
+
+  const copyText = async (text) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text)
+      return
+    }
+    const ta = document.createElement('textarea')
+    ta.value = text
+    ta.setAttribute('readonly', '')
+    ta.style.position = 'fixed'
+    ta.style.left = '-9999px'
+    document.body.appendChild(ta)
+    ta.select()
+    document.execCommand('copy')
+    document.body.removeChild(ta)
+  }
+
+  triggers.forEach((el) => {
+    el.addEventListener('click', async () => {
+      const phone = el.dataset.copyPhone
+      if (!phone) return
+      try {
+        await copyText(phone)
+        showToast()
+      } catch {
+        showToast()
+      }
+    })
   })
 }
