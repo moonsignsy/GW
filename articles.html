@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="沉淀AI搜索时代的内容获客方法，让每一篇专业内容都成为客户找到你的入口。企税康财税营销增长知识库。" />
+  <title>财税营销增长知识库 — 企税康</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          },
+          colors: {
+            primary: '#0f172a',
+            secondary: '#334155',
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="assets/custom.css" />
+</head>
+<body class="font-body text-slate-950 bg-slate-50" data-page="articles">
+
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-nav header-light transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-2.5 shrink-0 cursor-pointer group">
+        <img src="assets/logo.png" alt="企税康" class="logo-img h-9 w-auto object-contain" />
+        <span class="header-slogan hidden md:inline text-white/70 text-sm font-medium border-l border-white/20 pl-2.5 group-hover:text-white/90 transition-colors duration-200">财税合规专家</span>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-0.5" aria-label="主导航">
+        <a href="index.html#hero" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">首页</a>
+        <a href="index.html#products" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">服务产品</a>
+        <a href="index.html#testimonials" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">客户证言</a>
+        <a href="articles.html" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">内容中心</a>
+        <a href="showcase.html" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">企业风采</a>
+        <a href="index.html#footer" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">关于我们</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button type="button" data-copy-phone="400-151-6208" class="header-phone-copy header-util-link hidden lg:flex items-center gap-2 text-white/65 hover:text-white text-sm transition-colors duration-200 cursor-pointer whitespace-nowrap bg-transparent border-0 px-2.5 py-1.5 font-inherit rounded-lg hover:bg-white/10" aria-label="复制全国客服电话">
+          <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>
+          <span class="hidden xl:inline">全国客服：</span><span>400-151-6208</span>
+        </button>
+        <a href="index.html#lead-form" class="hidden sm:inline-flex btn-gradient-blue text-white text-xs font-semibold px-4 py-2 rounded-lg hover:opacity-90 hover:-translate-y-px transition-all duration-200 cursor-pointer shadow-lg shadow-blue-900/30 whitespace-nowrap">
+          免费咨询
+        </a>
+        <button id="menu-toggle" type="button" class="header-menu-btn xl:hidden text-white p-1.5 cursor-pointer" aria-label="打开菜单" aria-expanded="false">
+          <i data-lucide="menu" id="icon-menu" class="w-5 h-5"></i>
+          <i data-lucide="x" id="icon-close" class="w-5 h-5 hidden"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-menu" class="xl:hidden hidden border-t border-white/10 px-4 py-4 flex flex-col gap-1">
+      <a href="index.html#hero" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">首页</a>
+      <a href="index.html#products" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">服务产品</a>
+      <a href="index.html#testimonials" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">客户证言</a>
+      <a href="articles.html" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">内容中心</a>
+      <a href="showcase.html" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">企业风采</a>
+      <a href="index.html#footer" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">关于我们</a>
+      <a href="tel:400-151-6208" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer flex items-center gap-2 lg:hidden">
+        <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>全国客服：400-151-6208
+      </a>
+      <a href="index.html#lead-form" class="mt-2 btn-gradient-blue text-white text-center font-semibold px-5 py-3 rounded-lg cursor-pointer">免费财税测算 / 立即咨询</a>
+    </nav>
+  </header>
+
+  <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">复制成功</div>
+
+  <main class="pt-14">
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12 md:mb-14">
+          <h1 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">财税营销增长知识库</h1>
+          <p class="text-secondary max-w-3xl mx-auto leading-relaxed">沉淀AI搜索时代的内容获客方法，让每一篇专业内容都成为客户找到你的入口</p>
+        </div>
+
+        <div id="articles-list" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <p class="col-span-full text-center text-secondary text-sm">正在加载文章…</p>
+        </div>
+        <div id="articles-empty" class="article-empty hidden">
+          <i data-lucide="file-text" class="w-10 h-10 text-slate-300"></i>
+          <p data-empty-text>暂无相关文章</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="bg-primary text-white">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid md:grid-cols-3 gap-10">
+        <div>
+          <img src="assets/logo.png" alt="企税康" class="logo-img h-10 mb-4" />
+          <p class="text-white/60 text-sm leading-relaxed">企税康-财税合规专家，全国连锁财税服务品牌。</p>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-sky-400"></i>服务城市
+          </h4>
+          <div class="grid grid-cols-5 gap-2 text-sm text-white/60">
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">苏州</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">无锡</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">常州</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">南京</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">南通</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">上海</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">杭州</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">嘉兴</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">宁波</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">绍兴</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">广州</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">深圳</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">东莞</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">中山</span>
+            <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">海口</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold mb-4">友情链接</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="https://www.chinatax.gov.cn/" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-sky-300 transition-colors duration-200 cursor-pointer">国家税务总局</a></li>
+            <li><a href="https://www.gsxt.gov.cn/" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-sky-300 transition-colors duration-200 cursor-pointer">国家企业信用信息公示系统</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm text-white/40">
+        Copyright © 2026 企税康版权所有 | <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition-colors duration-200">苏ICP备2026042506号</a> | <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition-colors duration-200">企税康用户服务协议及隐私政策</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons()</script>
+  <script src="assets/articles.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>

@@ -42,18 +42,20 @@
 
       <!-- 主导航 -->
       <nav class="hidden xl:flex items-center gap-0.5" aria-label="主导航">
-        <a href="#hero" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">首页</a>
-        <a href="#products" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">服务产品</a>
-        <a href="#testimonials" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">客户证言</a>
-        <a href="#footer" class="header-nav-link px-2.5 py-2 text-white/75 text-sm hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">关于我们</a>
+        <a href="#hero" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">首页</a>
+        <a href="#products" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">服务产品</a>
+        <a href="#testimonials" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">客户证言</a>
+        <a href="articles.html" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">内容中心</a>
+        <a href="showcase.html" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">企业风采</a>
+        <a href="#footer" class="header-nav-link px-2.5 py-2 text-white/75 text-base hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap">关于我们</a>
       </nav>
 
       <!-- 右侧：工具区 + CTA + 汉堡 -->
       <div class="flex items-center gap-3">
-        <a href="tel:400-400-4000" class="header-util-link hidden items-center gap-1.5 text-white/65 hover:text-white text-xs transition-colors duration-200 cursor-pointer" aria-hidden="true">
-          <i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i>
-          <span class="hidden xl:inline">全国客服：</span><span>400-400-4000</span>
-        </a>
+        <button type="button" data-copy-phone="400-151-6208" class="header-phone-copy header-util-link hidden lg:flex items-center gap-2 text-white/65 hover:text-white text-sm transition-colors duration-200 cursor-pointer whitespace-nowrap bg-transparent border-0 px-2.5 py-1.5 font-inherit rounded-lg hover:bg-white/10" aria-label="复制全国客服电话">
+          <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>
+          <span class="hidden xl:inline">全国客服：</span><span>400-151-6208</span>
+        </button>
         <a href="#lead-form" class="hidden sm:inline-flex btn-gradient-blue text-white text-xs font-semibold px-4 py-2 rounded-lg hover:opacity-90 hover:-translate-y-px transition-all duration-200 cursor-pointer shadow-lg shadow-blue-900/30 whitespace-nowrap">
           免费咨询
         </a>
@@ -65,13 +67,20 @@
     </div>
 
     <nav id="mobile-menu" class="xl:hidden hidden border-t border-white/10 px-4 py-4 flex flex-col gap-1">
-      <a href="#hero" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">首页</a>
-      <a href="#products" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">服务产品</a>
-      <a href="#testimonials" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">客户证言</a>
-      <a href="#footer" class="header-mobile-link px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">关于我们</a>
+      <a href="#hero" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">首页</a>
+      <a href="#products" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">服务产品</a>
+      <a href="#testimonials" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">客户证言</a>
+      <a href="articles.html" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">内容中心</a>
+      <a href="showcase.html" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">企业风采</a>
+      <a href="#footer" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer">关于我们</a>
+      <a href="tel:400-151-6208" class="header-mobile-link px-3 py-2.5 text-base text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 cursor-pointer flex items-center gap-2 lg:hidden">
+        <i data-lucide="phone" class="w-4 h-4 shrink-0"></i>全国客服：400-151-6208
+      </a>
       <a href="#lead-form" class="mt-2 btn-gradient-blue text-white text-center font-semibold px-5 py-3 rounded-lg cursor-pointer">免费财税测算 / 立即咨询</a>
     </nav>
   </header>
+
+  <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">复制成功</div>
 
   <main>
     <!-- 3. Hero 首屏 -->
@@ -92,7 +101,7 @@
             <span class="bg-gradient-to-r from-sky-300 to-blue-400 bg-clip-text text-transparent">助力企业行稳致远</span>
           </h1>
           <p class="text-white/70 text-lg mb-10 max-w-xl">
-            领先财税合规服务商，13年深耕，100+专业团队，18000+企业信赖之选
+            领先财税合规服务商，14年深耕，150+专业团队，18000+企业信赖之选
           </p>
           <div class="flex flex-wrap gap-4">
             <a href="#lead-form" class="btn-gradient-blue text-white font-semibold px-8 py-3.5 rounded-lg hover:opacity-90 hover:-translate-y-px transition-all duration-200 cursor-pointer shadow-xl shadow-blue-900/40">立即咨询</a>
@@ -103,13 +112,13 @@
         <div class="mt-16 md:mt-24 flex flex-wrap gap-4 justify-center md:justify-start">
           <div class="flex-1 min-w-[140px] bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-6 py-5 text-center">
             <div class="font-heading text-3xl md:text-4xl font-bold text-white tabular-nums">
-              <span data-counter="13" data-suffix=" Years">0</span>
+              <span data-counter="14" data-suffix=" Years">0</span>
             </div>
             <div class="text-white/70 text-sm mt-1">行业深耕（年）</div>
           </div>
           <div class="flex-1 min-w-[140px] bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-6 py-5 text-center">
             <div class="font-heading text-3xl md:text-4xl font-bold text-white tabular-nums">
-              <span data-counter="100" data-suffix="+">0</span>
+              <span data-counter="150" data-suffix="+">0</span>
             </div>
             <div class="text-white/70 text-sm mt-1">团队成员（人）</div>
           </div>
@@ -128,7 +137,7 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-14">
           <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">产品体系</h2>
-          <p class="text-secondary max-w-2xl mx-auto">Lifecycle Product System — 从初创到集团化，精准匹配企业发展阶段的财税合规解决方案</p>
+          <p class="text-secondary max-w-2xl mx-auto">从初创到集团化，精准匹配企业发展阶段的财税合规解决方案</p>
         </div>
 
         <!-- 三栏布局：左预算 | 中金字塔（焦点） | 右阶段详情 -->
@@ -147,15 +156,15 @@
               </div>
               <div data-budget-for="2" class="pyramid-budget-box">
                 <span class="pyramid-budget-tier">发展期</span>
-                <span class="pyramid-budget-value">5w - 30w 元 / 年</span>
+                <span class="pyramid-budget-value">5W - 30W 元 / 年</span>
               </div>
               <div data-budget-for="1" class="pyramid-budget-box">
                 <span class="pyramid-budget-tier">成长期</span>
-                <span class="pyramid-budget-value">1w - 5w 元 / 年</span>
+                <span class="pyramid-budget-value">1W - 5W 元 / 年</span>
               </div>
               <div data-budget-for="0" class="pyramid-budget-box">
                 <span class="pyramid-budget-tier">初创期</span>
-                <span class="pyramid-budget-value">1w 元以内 / 年</span>
+                <span class="pyramid-budget-value">1W 元以内 / 年</span>
               </div>
             </div>
           </aside>
@@ -177,7 +186,7 @@
                 </button>
                 <button type="button" data-pyramid="1" class="pyramid-tier pyramid-tier--1 pyramid-btn" aria-label="成长期 - 合规代账">
                   <span class="pyramid-tier-title">合规代账</span>
-                  <span class="pyramid-tier-sub">（5年以上工作经验中级会计）</span>
+                  <span class="pyramid-tier-sub">（5年以上经验，中级会计职称）</span>
                 </button>
                 <button type="button" data-pyramid="0" class="pyramid-tier pyramid-tier--0 pyramid-btn" aria-label="初创期 - 常规代账">
                   <span class="pyramid-tier-title">常规代账 + 工商代办服务</span>
@@ -196,15 +205,15 @@
               <div class="pyramid-dots-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
               <div id="pyramid-detail" class="relative z-10 h-full flex flex-col justify-center p-5 xl:p-6">
                 <div class="pyramid-stage-badge badge-growth" id="pyramid-detail-badge">成长期</div>
-                <p class="pyramid-detail-scale" id="pyramid-detail-scale">年营收 300w 以上</p>
+                <p class="pyramid-detail-scale" id="pyramid-detail-scale">年营收 500W 以上</p>
                 <div class="mt-4 space-y-4">
                   <div>
                     <p class="pyramid-detail-label">核心推荐服务体系</p>
-                    <p class="pyramid-detail-value" id="pyramid-detail-service">合规代账（5年以上经验中级会计主理）</p>
+                    <p class="pyramid-detail-value" id="pyramid-detail-service">合规代账（5年以上经验，中级会计职称）</p>
                   </div>
                   <div class="pt-4 border-t border-slate-200/70">
                     <p class="pyramid-detail-label">对应预算</p>
-                    <p class="pyramid-detail-budget" id="pyramid-detail-budget">1w - 5w 元 / 年</p>
+                    <p class="pyramid-detail-budget" id="pyramid-detail-budget">1W - 5W 元 / 年</p>
                   </div>
                 </div>
               </div>
@@ -229,7 +238,7 @@
               </button>
               <button type="button" data-pyramid="1" class="pyramid-tier pyramid-tier--1 pyramid-btn" aria-label="成长期 - 合规代账">
                 <span class="pyramid-tier-title">合规代账</span>
-                <span class="pyramid-tier-sub">（5年以上工作经验中级会计）</span>
+                <span class="pyramid-tier-sub">（5年以上经验，中级会计职称）</span>
               </button>
               <button type="button" data-pyramid="0" class="pyramid-tier pyramid-tier--0 pyramid-btn" aria-label="初创期 - 常规代账">
                 <span class="pyramid-tier-title">常规代账 + 工商代办服务</span>
@@ -245,15 +254,15 @@
               <div class="pyramid-dots-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
               <div id="pyramid-detail-mobile" class="relative z-10 h-full flex flex-col justify-center p-6">
                 <div class="pyramid-stage-badge badge-growth" id="pyramid-detail-mobile-badge">成长期</div>
-                <p class="pyramid-detail-scale" id="pyramid-detail-mobile-scale">年营收 300w 以上</p>
+                <p class="pyramid-detail-scale" id="pyramid-detail-mobile-scale">年营收 500W 以上</p>
                 <div class="mt-4 space-y-4">
                   <div>
                     <p class="pyramid-detail-label">核心推荐服务体系</p>
-                    <p class="pyramid-detail-value" id="pyramid-detail-mobile-service">合规代账（5年以上经验中级会计主理）</p>
+                    <p class="pyramid-detail-value" id="pyramid-detail-mobile-service">合规代账（5年以上经验，中级会计职称）</p>
                   </div>
                   <div class="pt-4 border-t border-slate-200/70">
                     <p class="pyramid-detail-label">服务费用预算</p>
-                    <p class="pyramid-detail-budget" id="pyramid-detail-mobile-budget">1w - 5w 元 / 年</p>
+                    <p class="pyramid-detail-budget" id="pyramid-detail-mobile-budget">1W - 5W 元 / 年</p>
                   </div>
                 </div>
               </div>
@@ -457,7 +466,7 @@
         <div class="grid sm:grid-cols-2 gap-6">
           <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
             <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-100 to-indigo-100 flex items-center justify-center mb-5"><i data-lucide="clock" class="w-7 h-7 text-sky-700"></i></div>
-            <h3 class="font-heading text-lg font-semibold text-primary mb-2">专注服务 · 深耕行业13年</h3>
+            <h3 class="font-heading text-lg font-semibold text-primary mb-2">专注服务 · 深耕行业14年</h3>
             <p class="text-secondary text-sm leading-relaxed">用时间沉淀最靠谱的财税合规水准，历经政策变革与市场考验。</p>
           </div>
           <div class="group p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-sky-200 hover:shadow-xl transition-all duration-300">
@@ -520,9 +529,28 @@
         </div>
       </div>
     </section>
+
+    <!-- 8. 内容中心 -->
+    <section id="articles" class="py-20 md:py-28 bg-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">内容中心</h2>
+          <p class="text-secondary max-w-2xl mx-auto">政策解读、合规实务与行业观察，帮助企业把财税风险管在日常，而不是留到汇算清缴。</p>
+        </div>
+        <div id="articles-preview" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <p class="col-span-full text-center text-secondary text-sm">正在加载文章…</p>
+        </div>
+        <div id="articles-more" class="article-more is-hidden">
+          <a href="articles.html" class="inline-flex items-center gap-2 border-2 border-sky-200 text-sky-800 font-semibold px-8 py-3.5 rounded-lg bg-sky-50 hover:bg-sky-100 hover:border-sky-300 transition-all duration-200 cursor-pointer">
+            查看更多
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- 8. 页脚 & 线索留存 -->
+  <!-- 9. 页脚 & 线索留存 -->
   <footer id="footer" class="bg-primary text-white">
     <div id="lead-form" class="border-b border-white/10">
       <div class="max-w-7xl mx-auto px-4 py-16 md:py-20">
@@ -586,13 +614,14 @@
         </div>
       </div>
       <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm text-white/40">
-        Copyright © 2026 企税康版权所有 | <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition-colors duration-200">苏ICP备2026042506号</a>
+        Copyright © 2026 企税康版权所有 | <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition-colors duration-200">苏ICP备2026042506号</a> | <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition-colors duration-200">企税康用户服务协议及隐私政策</a>
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>lucide.createIcons()</script>
+  <script src="assets/articles.js"></script>
   <script src="assets/main.js"></script>
 </body>
 </html>
