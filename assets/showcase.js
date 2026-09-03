@@ -118,6 +118,119 @@ function formatTime(seconds) {
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 }
 
+function firstFrameTime(video) {
+  return Number.isFinite(video.duration) && video.duration > 0.05
+    ? Math.min(0.12, video.duration * 0.02)
+    : 0.001
+}
+
+function coverSrc(src) {
+  return src.includes('#') ? src : `${src}#t=0.1`
+}
+
+function bindCoverFrame(video, onReady) {
+  if (!video || video.dataset.coverBound === '1') return
+  video.dataset.coverBound = '1'
+  video.muted = true
+  video.defaultMuted = true
+  video.playsInline = true
+
+  const showFrame = () => {
+    onReady?.(video.duration)
+    const target = firstFrameTime(video)
+    const settle = () => video.pause()
+    if (video.readyState >= 2) {
+      try {
+        video.currentTime = target
+      } catch {
+        settle()
+      }
+    }
+    video.addEventListener('seeked', settle, { once: true })
+    try {
+      video.currentTime = target
+    } catch {
+      settle()
+    }
+  }
+
+  if (video.readyState >= 1) showFrame()
+  else {
+    video.addEventListener('loadedmetadata', showFrame, { once: true })
+    video.addEventListener('loadeddata', showFrame, { once: true })
+  }
+}
+
+function captureVideoPoster(src) {
+  return new Promise((resolve) => {
+    const video = document.createElement('video')
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+    video.preload = 'auto'
+    video.crossOrigin = 'anonymous'
+
+    let settled = false
+    let timer = 0
+
+    const finish = (poster, seconds) => {
+      if (settled) return
+      settled = true
+      window.clearTimeout(timer)
+      video.pause()
+      video.removeAttribute('src')
+      video.load()
+      resolve({
+        poster: poster || '',
+        seconds: Number.isFinite(seconds) && seconds > 0 ? seconds : 0,
+      })
+    }
+
+    const snap = () => {
+      const width = video.videoWidth
+      const height = video.videoHeight
+      const seconds = video.duration
+      if (!width || !height) {
+        finish('', seconds)
+        return
+      }
+      const scale = Math.min(1, 480 / Math.max(width, height))
+      const canvas = document.createElement('canvas')
+      canvas.width = Math.max(1, Math.round(width * scale))
+      canvas.height = Math.max(1, Math.round(height * scale))
+      const ctx = canvas.getContext('2d')
+      if (!ctx) {
+        finish('', seconds)
+        return
+      }
+      try {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            finish('', seconds)
+            return
+          }
+          finish(URL.createObjectURL(blob), seconds)
+        }, 'image/jpeg', 0.82)
+      } catch {
+        finish('', seconds)
+      }
+    }
+
+    video.addEventListener('loadedmetadata', () => {
+      video.addEventListener('seeked', snap, { once: true })
+      try {
+        video.currentTime = firstFrameTime(video)
+      } catch {
+        snap()
+      }
+    }, { once: true })
+    video.addEventListener('error', () => finish('', 0), { once: true })
+    timer = window.setTimeout(() => finish('', video.duration || 0), 12000)
+    video.src = src
+  })
+}
+
 function setStatus(page, message) {
   const statusEl = page.querySelector('[data-status]')
   const layoutEl = page.querySelector('[data-layout]')
@@ -173,7 +286,7 @@ function mountShowcase(page, films) {
     playerEl.dataset.seconds = String(film.seconds)
     playerEl.dataset.id = film.id
     playerEl.innerHTML = `
-      <video class="showcase-player__video" playsinline preload="none"></video>
+      <video class="showcase-player__video" playsinline preload="metadata" muted></video>
       <div class="showcase-player__poster"></div>
       <button type="button" class="showcase-player__big" data-big-play aria-label="播放 ${esc(film.title)}">
         <span class="showcase-player__big-icon"><i data-lucide="play" class="w-7 h-7"></i></span>
@@ -201,7 +314,15 @@ function mountShowcase(page, films) {
     film.seconds = seconds
     film.duration = formatTime(seconds)
     if (film.id === currentId) renderNow(film)
-    renderList()
+    const thumb = listEl.querySelector(`[data-film="${CSS.escape(id)}"] .showcase-item__thumb`)
+    if (!thumb) return
+    let badge = thumb.querySelector('.showcase-item__dur')
+    if (!badge) {
+      badge = document.createElement('span')
+      badge.className = 'showcase-item__dur'
+      thumb.appendChild(badge)
+    }
+    badge.textContent = film.duration
   }
 
   function bindPlayer(el) {
@@ -254,12 +375,12 @@ function mountShowcase(page, films) {
 
     const play = async () => {
       if (!video.getAttribute('src')) video.src = el.dataset.src
+      el.setAttribute('data-playing', '')
+      syncIcons()
       try {
         video.muted = el.hasAttribute('data-muted')
         await video.play()
         poster?.classList.add('is-hidden')
-        el.setAttribute('data-playing', '')
-        syncIcons()
       } catch {
         el.removeAttribute('data-playing')
         syncIcons()
@@ -276,9 +397,19 @@ function mountShowcase(page, films) {
       el.dataset.id = film.id
       el.dataset.src = film.src
       el.dataset.seconds = String(film.seconds)
-      video.removeAttribute('src')
-      video.load()
       poster?.classList.remove('is-hidden')
+      if (film.poster) {
+        poster.style.backgroundImage = `url("${film.poster}")`
+        poster.classList.add('has-frame')
+        video.poster = film.poster
+      } else {
+        poster.style.backgroundImage = ''
+        poster.classList.remove('has-frame')
+        video.removeAttribute('poster')
+      }
+      video.preload = 'metadata'
+      video.src = film.src
+      video.load()
       const label = el.querySelector('[data-big-play]')
       if (label) label.setAttribute('aria-label', `播放 ${film.title}`)
       paint()
@@ -289,6 +420,23 @@ function mountShowcase(page, films) {
     video.addEventListener('loadedmetadata', () => {
       rememberDuration(el.dataset.id, video.duration)
       paint()
+      if (el.hasAttribute('data-playing')) return
+      if (poster?.classList.contains('has-frame')) return
+      poster?.classList.add('is-hidden')
+      const target = firstFrameTime(video)
+      const reveal = () => {
+        if (!el.hasAttribute('data-playing')) video.pause()
+      }
+      video.addEventListener('seeked', reveal, { once: true })
+      try {
+        video.currentTime = target
+      } catch {
+        reveal()
+      }
+    })
+    video.addEventListener('loadeddata', () => {
+      if (el.hasAttribute('data-playing') || poster?.classList.contains('has-frame')) return
+      poster?.classList.add('is-hidden')
     })
     video.addEventListener('ended', pause)
     video.addEventListener('error', pause)
@@ -337,8 +485,10 @@ function mountShowcase(page, films) {
       return
     }
     listEl.innerHTML = items.map((film) => `
-      <button type="button" class="showcase-item${film.id === currentId ? ' is-active' : ''}" data-film="${esc(film.id)}">
+      <div class="showcase-item${film.id === currentId ? ' is-active' : ''}" role="button" tabindex="0" data-film="${esc(film.id)}">
         <span class="showcase-item__thumb">
+          <video class="showcase-item__cover" muted playsinline preload="metadata" src="${esc(coverSrc(film.src))}"></video>
+          <img class="showcase-item__poster" alt="" ${film.poster ? `src="${esc(film.poster)}"` : 'hidden'} />
           <i data-lucide="play" class="w-4 h-4"></i>
           ${film.duration ? `<span class="showcase-item__dur">${film.duration}</span>` : ''}
         </span>
@@ -346,16 +496,68 @@ function mountShowcase(page, films) {
           <span class="showcase-item__kind">${esc(film.kind)}</span>
           <span class="showcase-item__title">${esc(film.title)}</span>
         </span>
-      </button>
+      </div>
     `).join('')
+    listEl.querySelectorAll('.showcase-item__cover').forEach((cover) => {
+      const id = cover.closest('[data-film]')?.dataset.film
+      const film = films.find((item) => item.id === id)
+      if (film?.poster) {
+        cover.removeAttribute('src')
+        cover.load()
+        return
+      }
+      bindCoverFrame(cover, (seconds) => rememberDuration(id, seconds))
+    })
     if (window.lucide) lucide.createIcons()
+  }
+
+  function applyListPoster(film) {
+    const item = listEl.querySelector(`[data-film="${CSS.escape(film.id)}"]`)
+    if (!item || !film.poster) return
+    const img = item.querySelector('.showcase-item__poster')
+    const cover = item.querySelector('.showcase-item__cover')
+    if (img) {
+      img.src = film.poster
+      img.removeAttribute('hidden')
+    }
+    if (cover) {
+      cover.removeAttribute('src')
+      cover.load()
+    }
+  }
+
+  async function fillCovers() {
+    const ordered = [byId(currentId), ...films.filter((item) => item.id !== currentId)]
+    for (const film of ordered) {
+      const { poster, seconds } = await captureVideoPoster(film.src)
+      if (seconds) {
+        film.seconds = seconds
+        film.duration = formatTime(seconds)
+        rememberDuration(film.id, seconds)
+      }
+      if (!poster) continue
+      film.poster = poster
+      applyListPoster(film)
+      if (film.id === playerEl.dataset.id) {
+        const posterEl = playerEl.querySelector('.showcase-player__poster')
+        const videoEl = playerEl.querySelector('video')
+        if (posterEl) {
+          posterEl.style.backgroundImage = `url("${poster}")`
+          posterEl.classList.add('has-frame')
+          if (!playerEl.hasAttribute('data-playing')) posterEl.classList.remove('is-hidden')
+        }
+        if (videoEl && !playerEl.hasAttribute('data-playing')) videoEl.poster = poster
+      }
+    }
   }
 
   function selectFilm(id, autoplay) {
     const film = byId(id)
     currentId = film.id
     renderNow(film)
-    renderList()
+    listEl.querySelectorAll('[data-film]').forEach((item) => {
+      item.classList.toggle('is-active', item.dataset.film === currentId)
+    })
     playerEl._load?.(film, autoplay)
   }
 
@@ -368,14 +570,24 @@ function mountShowcase(page, films) {
   })
 
   listEl.addEventListener('click', (event) => {
-    const btn = event.target.closest('[data-film]')
-    if (!btn) return
-    selectFilm(btn.dataset.film, true)
+    const item = event.target.closest('[data-film]')
+    if (!item) return
+    selectFilm(item.dataset.film, true)
+  })
+
+  listEl.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    const item = event.target.closest('[data-film]')
+    if (!item) return
+    event.preventDefault()
+    selectFilm(item.dataset.film, true)
   })
 
   renderPlayerShell(films[0])
+  playerEl._load?.(films[0], false)
   renderNow(films[0])
   renderCats()
   renderList()
   if (window.lucide) lucide.createIcons()
+  fillCovers()
 }
